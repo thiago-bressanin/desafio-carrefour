@@ -1,0 +1,26 @@
+{
+  "name": "desafio-carrefour-root",
+  "version": "1.0.0",
+  "description": "Carrefour Merchant Cash Flow Control & Daily Consolidation Platform",
+  "private": true,
+  "scripts": {
+    "setup": "npm run setup:launch && npm run setup:consolidation && npm run setup:frontend",
+    "setup:launch": "cd backend/launch-service && npm install",
+    "setup:consolidation": "cd backend/consolidation-service && npm install",
+    "setup:frontend": "cd frontend && npm install",
+    "start:launch": "cd backend/launch-service && npm run dev",
+    "start:consolidation": "cd backend/consolidation-service && npm run dev",
+    "start:frontend": "cd frontend && npm start",
+    "test": "npm run test:launch && npm run test:consolidation",
+    "test:launch": "cd backend/launch-service && npm test",
+    "test:consolidation": "cd backend/consolidation-service && npm test",
+    "build": "npm run build:launch && npm run build:consolidation && npm run build:frontend",
+    "build:launch": "cd backend/launch-service && npm run build",
+    "build:consolidation": "cd backend/consolidation-service && npm run build",
+    "build:frontend": "cd frontend && npm run build",
+    "docker:up": "docker-compose up --build",
+    "docker:down": "docker-compose down"
+  },
+  "author": "Thiago Bressanin",
+  "license": "MIT"
+}

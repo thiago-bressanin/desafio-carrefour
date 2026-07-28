@@ -1,0 +1,94 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: carrefour_postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgrespassword
+      POSTGRES_DB: cashflow
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  mongodb:
+    image: mongo:7.0
+    container_name: carrefour_mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: carrefour_redis
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  launch-service:
+    build:
+      context: ./backend/launch-service
+      dockerfile: Dockerfile
+    container_name: carrefour_launch_service
+    ports:
+      - "3001:3001"
+    environment:
+      PORT: 3001
+      DATABASE_URL: postgresql://postgres:postgrespassword@postgres:5432/cashflow
+      REDIS_URL: redis://redis:6379
+      USE_IN_MEMORY: "false"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  consolidation-service:
+    build:
+      context: ./backend/consolidation-service
+      dockerfile: Dockerfile
+    container_name: carrefour_consolidation_service
+    ports:
+      - "3002:3002"
+    environment:
+      PORT: 3002
+      MONGODB_URI: mongodb://mongodb:27017/consolidation
+      REDIS_URL: redis://redis:6379
+      USE_IN_MEMORY: "false"
+    depends_on:
+      mongodb:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: carrefour_frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - launch-service
+      - consolidation-service
+
+volumes:
+  postgres_data:
+  mongo_data:
