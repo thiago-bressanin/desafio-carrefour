@@ -1,4 +1,8 @@
 node_modules/
+backend/consolidation-service/node_modules/
+backend/launch-service/node_modules/
+frontend/node_modules/
+
 dist/
 .env
 *.log
