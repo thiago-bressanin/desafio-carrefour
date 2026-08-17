@@ -20,13 +20,13 @@ Nossa arquitetura garante **100% de disponibilidade no Serviço de Lançamentos 
 
 ## 📐 Diagramas de Arquitetura (UML & C4 Model)
 
-Todas as visões arquiteturais estão documentadas no diretório [`docs/diagrams/`](file:///c:/projects/desafio-carrefour/docs/diagrams):
+Todas as visões arquiteturais estão documentadas no diretório [`docs/diagrams/`](docs/diagrams):
 
-1. **[C4 Context Diagram](file:///c:/projects/desafio-carrefour/docs/diagrams/c4_context.md)**: Visão macro do sistema e interações com atores (Comerciante, Gestor Financeiro, ERP Legado).
-2. **[C4 Container Diagram](file:///c:/projects/desafio-carrefour/docs/diagrams/c4_container.md)**: Estrutura dos microserviços, barramento de eventos e bancos de dados.
-3. **[C4 Component Diagram](file:///c:/projects/desafio-carrefour/docs/diagrams/c4_component.md)**: Detalhamento em camadas DDD (Domain, Application, Infrastructure, Presentation).
-4. **[Event Flow & Sequence Diagram](file:///c:/projects/desafio-carrefour/docs/diagrams/event_flow_sequence.md)**: Fluxo assíncrono de ponta a ponta com Cache-Aside e injeção de latência.
-5. **[Domain Model UML Class Diagram](file:///c:/projects/desafio-carrefour/docs/diagrams/domain_uml_class.md)**: Entidades, Aggregates, Value Objects, Domain Events e Repositórios.
+1. **[C4 Context Diagram](docs/diagrams/c4_context.md)**: Visão macro do sistema e interações com atores (Comerciante, Gestor Financeiro, ERP Legado).
+2. **[C4 Container Diagram](docs/diagrams/c4_container.md)**: Estrutura dos microserviços, barramento de eventos e bancos de dados.
+3. **[C4 Component Diagram](docs/diagrams/c4_component.md)**: Detalhamento em camadas DDD (Domain, Application, Infrastructure, Presentation).
+4. **[Event Flow & Sequence Diagram](docs/diagrams/event_flow_sequence.md)**: Fluxo assíncrono de ponta a ponta com Cache-Aside e injeção de latência.
+5. **[Domain Model UML Class Diagram](docs/diagrams/domain_uml_class.md)**: Entidades, Aggregates, Value Objects, Domain Events e Repositórios.
 
 ---
 
@@ -60,7 +60,7 @@ docker-compose up --build
 
 Acesse a plataforma no seu navegador:
 - 🌐 **Frontend Dashboard (Angular)**: [http://localhost:80](http://localhost:80)
-- ⚡ **Launch Service API (PostgreSQL)**: [http://localhost:3001/health](http://localhost:3001/health)
+- ⚡ **Launch Service API (Postmerchant_carrefougreSQL)**: [http://localhost:3001/health](http://localhost:3001/health)
 - 📊 **Consolidation Service API (MongoDB/Redis)**: [http://localhost:3002/health](http://localhost:3002/health)
 
 ---
